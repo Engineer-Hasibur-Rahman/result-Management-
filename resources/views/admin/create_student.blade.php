@@ -28,7 +28,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form method="post" action="{{url('/create/student')}}">
+                                        <form method="post" action="{{url('/create/student')}}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-6">
@@ -88,9 +88,9 @@
                                                        <div style="color:red"> {{$errors->first('board')}}</div>
                                                        @endif
                                                     </div>
-                                                    
+
                                                 </div>
-        
+
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label>
@@ -149,7 +149,7 @@
                                                        <div style="color:red"> {{$errors->first('permanent_address')}}</div>
                                                        @endif
                                                     </div>
-                                                    
+
                                                      <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title mb-3">Student Images</h4>
@@ -158,25 +158,25 @@
                                             </div>
                                     </div>
 
-                                </div> 
+                                </div>
                                 <!-- end card-->
                                                 </div>
                                             </div>
-        
+
                                             <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Add Student</button>
                                         </form>
-        
+
                                     </div>
                                 </div>
-                    
+
                 </div>
                 <!-- End Page-content -->
-                @if(isset($success) && $success == true) 
+                @if(isset($success) && $success == true)
                <script>
                 Swal.fire(
                     'success','New Student sucessfully done','success'
                 );
-            
+
           </script>
-               @endif 
+               @endif
  @endsection
