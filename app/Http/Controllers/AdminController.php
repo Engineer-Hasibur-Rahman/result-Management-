@@ -52,7 +52,7 @@ class AdminController extends Controller
         $students = Student::all();
         $subjects = Subject::all();
         $courses = Courses::all();
-      // return view('admin.studentlist')->with('users',$users); 
+      // return view('admin.studentlist')->with('users',$users);
        return view('admin.dashboard')->with ('user',$user)
                                         ->with('oparetors',$oparetors)
                                         ->with('teachers',$teachers)
@@ -64,7 +64,7 @@ class AdminController extends Controller
     //---------view add oparetor page-------------//
     public function create_oparetor()
     {
-        
+
        return view('admin.create_oparetor');
     }
 //---------view add oparetor page end-------------//
@@ -72,7 +72,7 @@ class AdminController extends Controller
      public function add_oparetor(OparetorRequest $request)
     {
 
-         
+
 
         Oparetor::insert([
             'first_name'=>$request->first_name,
@@ -104,7 +104,7 @@ class AdminController extends Controller
 
 
       ]);
-        
+
        return view('admin.create_oparetor',['success'=>true]);
     }
     //--------- add oparetor funtion end-------------//
@@ -113,7 +113,7 @@ class AdminController extends Controller
     {
         $oparetors = Oparetor::all();
         return view('admin.oparetorlist')->with('oparetors',$oparetors);
-       
+
     }
       //--------- add oparetor list view funtion end-------------//
       public function oparetorprofile($id)
@@ -123,13 +123,13 @@ class AdminController extends Controller
    }
      //---------  oparetor edit start-------------//
  public function Oparetoredit($id)
-    {  
+    {
         $oparetor = Oparetor::find($id);
        return view('admin.oparetor_edit')->with('oparetor',$oparetor);
     }
        //---------  oparetor edit end-------------//
 
-     //-----------Oparetor update start----------// 
+     //-----------Oparetor update start----------//
     public function oparetor_update(Request $request,$id)
     {
         $oparetor=Oparetor::find($id);
@@ -152,11 +152,11 @@ class AdminController extends Controller
               $image=$request->image->move(public_path('profile_img'),$newImageName);
                $oparetor->image=$newImageName;
       $oparetor->save();
-      
+
 
       User::where('oparetor_id', $id)
       ->update(['is_active' => $request->is_active]);
-        
+
       return view('admin.oparetor_edit',['success'=>true])->with('oparetor',$oparetor);
     }
 
@@ -167,7 +167,7 @@ class AdminController extends Controller
         return view('admin.oparetorlist',['success'=>true])->with('oparetors',$oparetors);
     }
  //delete funtion end
-      //-----------oparetor update end----------// 
+      //-----------oparetor update end----------//
     //---------------------------------------Oparetorend-------------------------------------------------------------//
     //-------------------------------------teacherstart--------------------------------------------------------------//
     public function create_teacher()
@@ -178,7 +178,7 @@ class AdminController extends Controller
      public function add_teacher(TeacherRequest $request)
     {
           Teacher::insert([
-           
+
             'first_name'=>$request->first_name,
              'last_name'=>$request->last_name,
               'father_name'=>$request->father_name,
@@ -195,9 +195,9 @@ class AdminController extends Controller
                    'image'=>"",
                    'role'=>"2",
                     'is_active'=>"1"
-                   
-                   
-          ]);  
+
+
+          ]);
           $teacher_id=Teacher::where('first_name',$request->first_name)->pluck('id');
             User::insert([
             'username'=>$request->first_name,
@@ -210,7 +210,7 @@ class AdminController extends Controller
 
        return view('admin.create_teacher',['success'=>true]);
            }
-    
+
 
       public function teacherlist()
     {
@@ -218,7 +218,7 @@ class AdminController extends Controller
        return view('admin.teacherlist')->with('teachers',$teachers);
     }
     //student profile start
-               
+
     public function teacherprofile($id)
     {
         $teacher = Teacher::find($id);
@@ -228,15 +228,15 @@ class AdminController extends Controller
 
 
   public function  teacheredit($id)
-    {  
+    {
         $teacher = Teacher::find($id);
        return view('admin.teacher_edit')->with('teacher',$teacher);
     }
 
-    //-----------teacher update start----------// 
+    //-----------teacher update start----------//
 public function teacher_update(TeacherRequest $request,$id)
     {
-        
+
        $teacher= Teacher::find($id);
         $teacher->first_name=$request->first_name;
         $teacher->last_name=$request->last_name;
@@ -263,7 +263,7 @@ public function teacher_update(TeacherRequest $request,$id)
 
               return view('admin.teacher_edit',['success'=>true])->with('teacher',$teacher);
     }
-    //-----------teacher update end ----------// 
+    //-----------teacher update end ----------//
 
     //delete funtion start
      public function Teacherdestroy($id){
@@ -274,7 +274,7 @@ public function teacher_update(TeacherRequest $request,$id)
  //delete funtion end
 //active suspend funtion start
      public function Teachersuspend(Request $req,$id)
-    {  
+    {
         $user = Teacher::find($id);
         $user->username;
         $teacher = User::where('username', $user->username)
@@ -285,7 +285,7 @@ public function teacher_update(TeacherRequest $request,$id)
        return redirect('/Admin/teacherlist');
     }
      public function Teacheractive(Request $req,$id)
-    {  
+    {
         $user = Teacher::find($id);
         $user->is_active=1;
         $user->save();
@@ -299,12 +299,12 @@ public function teacher_update(TeacherRequest $request,$id)
        return view('admin.create_student');
     }
     //add student
-    
+
          public function add_student(StudentRequest $request)
     {
 
         Student::insert([
-           
+
             'student_name'=>$request->student_name,
               'father_name'=>$request->father_name,
                'mother_name'=>$request->mother_name,
@@ -323,7 +323,7 @@ public function teacher_update(TeacherRequest $request,$id)
                    'image'=>"",
                    'role'=>"4",
                     'is_active'=>"1"
-                   
+
           ]);
           $student_id=Student::where('student_name',$request->student_name)->pluck('id');
           User::insert([
@@ -337,7 +337,7 @@ public function teacher_update(TeacherRequest $request,$id)
           return view('admin.create_student',['success'=>true]);
     }
                //student profile start
-               
+
             public function studentprofile($id)
             {
                 $student = Student::find($id);
@@ -353,14 +353,14 @@ public function teacher_update(TeacherRequest $request,$id)
     }
     //-------------student edit
     public function  studentedit($id)
-    {  
+    {
         $student = Student::find($id);
        return view('admin.student_edit')->with('student',$student);
     }
     // student edit end
     //............student update start
     public function student_update(StudentRequest $request,$id)
-    {     
+    {
         $student = Student::find($id);
             $student->student_name=$request->student_name;
               $student->father_name=$request->father_name;
@@ -391,7 +391,7 @@ public function teacher_update(TeacherRequest $request,$id)
                         return view('admin.student_edit',['success'=>true])->with('student',$student);
     }
 
-    //-----------student update end----------// 
+    //-----------student update end----------//
     //delete funtion start
      public function Studentdestroy($id){
         Student::destroy($id);
@@ -405,10 +405,10 @@ public function teacher_update(TeacherRequest $request,$id)
 //---------------------------------------subject start---------------------------------------------------------------------//
      public function create_subject()
     {
-        
+
        return view('admin.create_subject');
     }
-    
+
         public function Addsubject(Request $req)
     {
 
@@ -422,28 +422,28 @@ public function teacher_update(TeacherRequest $request,$id)
     public function subjectlist()
     {
         $subjects = Subject::all();
-        
+
        return view('admin.subjectlist')->with('subjects',$subjects);
     }
     //subject edit view page
       public function    subject_edit($id)
-    {  
+    {
         $subject = Subject::find($id);
        return view('admin.subject_edit')->with('subject',$subject);
     }
 
-       //-----------subject update start----------// 
+       //-----------subject update start----------//
      public function subject_update(Request $request,$id)
     {
-        
+
         $subject = Subject::find($id);
         $subject->subject_name = $request->subject_name;
         $subject->subject_code = $request->subject_code;
-        
+
         $subject->save();
         return view('admin.subject_edit',['success'=>true])->with('subject',$subject);
     }
-    
+
     //delete funtion start
      public function Subjectdestroy($id){
         Subject::destroy($id);
@@ -456,7 +456,7 @@ public function teacher_update(TeacherRequest $request,$id)
 //----------------create section view page-------------------------------------//
       public function create_section()
     {
-        
+
         $subject = Subject::all();
         $teachers = Teacher::all();
         $students = Student::all();
@@ -465,10 +465,10 @@ public function teacher_update(TeacherRequest $request,$id)
                                           ->with('students',$students)
                                           ->with('error',$error)
                                           ->with('teachers',$teachers);
-                                       
+
     }
     public function Addsection(Request $req)
-    {     
+    {
               $course = Courses::where('subject_id', $req->subject)
              ->where('teacher_id', $req->teacher)
              ->first();
@@ -497,9 +497,9 @@ else{
                                                                 ->with('error',$error)
                                                               ->with('teachers',$teachers);
 }
-           
-        
-        
+
+
+
     } //
     //section list funtion
     public function    assignStudent(Request $req)
@@ -537,9 +537,9 @@ else{
     }
     public function sectionlist()
     {
-     
+
       $courses = Courses::all();
-      
+
     foreach ($courses->pluck('subject_id') as $subject) {
       $subject_ids[]=$subject;
     }
@@ -549,13 +549,13 @@ else{
     }
        public function sectiondetails()
     {
-        
-      
+
+
        return view('admin.sectiondetails')->with('subject',$subject);
     }
      //section edit view page
       public function    section_edit($id)
-    {  
+    {
 
         $section = Section::find($id);
 
@@ -563,19 +563,19 @@ else{
         $subject = Subject::all();
         $teachers = Teacher::all();
         $students = Student::all();
-        
-      // return view('admin.studentlist')->with('users',$users); 
+
+      // return view('admin.studentlist')->with('users',$users);
        return view('admin.section_edit',)->with('subject',$subject)
                                         ->with('teachers',$teachers)
                                         ->with('students',$students)
                                         ->with('sections',$sections)
                                         ->with('section',$section);
-                                        
+
        //return view('admin.section_edit')->with('sections',$sections);
     }
 
     public function resultView($id){
-      
+
         $students=Student::all();
         $courses=Courses::all();
         // $sections=Section::all();
@@ -588,7 +588,7 @@ else{
         return view('admin.secStudentList') ->with('subject',$subject);
                                             // ->with('sections',$sections);
                                             // ->with('teachers',$teachers)
-                                           
+
     }
 
     public function SubmitMarks (Request $req){
@@ -596,15 +596,15 @@ else{
         $student_id= $req->input('student_id');
          $Subject_id= $req->input('Subject_id');
         $Student_marks=$req->input('marks');
-        
 
-   
+
+
 
 
 //$result = ResultModel::where('student_id',$student_id)->where('subject_id',$Subject_id)->update('result', $Student_marks);
 
 $result = DB::table('add_result')->where('student_id',$student_id)->where('Subject_id',$Subject_id)
-->update(array('result' => $Student_marks)); 
+->update(array('result' => $Student_marks));
 
 
 
@@ -649,11 +649,11 @@ return "fail";
  public function Sec_Studentdestroy($id){
   // dd($id);
    $secstudent=Section::where('student_id', $id)->delete();
-  
+
     return redirect('/Admin/sectionlist');
     //return redirect()->route('admin.index');
 }
- 
+
     //--------------------------------------section end---------------------------------------------------------------------//
      public function create_result()
     {
@@ -679,17 +679,17 @@ return "fail";
     public function adminprofile(Request $req)
     {
          $id = session('id');
-        
+
           $user=User::where('id',$id)->first();
-       
+
          return view('admin.admin_profile')->with ('user',$user);
-        
+
     }
     public function pro_update( $id)
     {
-     
+
     $admin=User::find($id);
-   
+
       return view('admin.admin_profile_edit')->with('admin',$admin);
     }
     public function profile_update(Request $req)
@@ -705,45 +705,45 @@ return "fail";
 
         $user->save();
       //   $user->is_active="1";
-       
+
       //   $newImageName=time().'-'.$req->name.'.'.$req->image->extension();
       //  $image=$req->image->move(public_path('profile_img'),$newImageName);
       //   $user->image=$newImageName;
       $user=User::where('id',$id)->first();
-       
+
       return view('admin.admin_profile')->with ('user',$user);
     }
-   
+
 
 //---------------------------------------admin end---------------------------------------------------------------------//
-   
-  
-    
+
+
+
     public function resultlist()
     {
         $users = User::all();
        return view('admin.resultlist')->with('users',$users);
     }
- 
-    
 
-  
-   
+
+
+
+
  public function  result_edit($id)
-    {  
+    {
         $user = User::find($id);
        return view('admin.result_edit')->with('user',$user);
     }
-   
-    
-    
+
+
+
      public function usersPending()
-    {  
+    {
       $users = User::all();
        return view('admin.usersPending')->with('users',$users);
     }
 
-   
- 
-     
+
+
+
 }

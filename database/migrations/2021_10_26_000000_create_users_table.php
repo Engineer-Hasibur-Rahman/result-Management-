@@ -20,10 +20,10 @@ class CreateUsersTable extends Migration
               $table->string('password');
               $table->string('role');
               $table->string('is_active');
-              $table->string('phone');
-              $table->unSignedInteger('teacher_id');
-              $table->unSignedInteger('oparetor_id');
-              $table->unSignedInteger('student_id');
+              $table->string('phone')->nullable();
+              $table->unSignedInteger('teacher_id')->nullable();
+              $table->unSignedInteger('oparetor_id')->nullable();
+              $table->unSignedInteger('student_id')->nullable();
               $table->foreign('teacher_id')->references('id')->on('teachers')->onUpdate('cascade')->onDelete('cascade');
              $table->foreign('oparetor_id')->references('id')->on('oparetors')->onUpdate('cascade')->onDelete('cascade');
               $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade')->onDelete('cascade');
