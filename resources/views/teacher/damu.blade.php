@@ -152,65 +152,75 @@
 
     $(document).ready( function(){
 
-    $('.editmarks').on('click',function(){
+        try{
 
 
-    $('#resltview').modal('show');
-
-    $tr= $(this).closest('tr');
-
-    var data= $tr.children("td").map(function(){
-
-           return $(this).text();
-
-    }).get();
+            $('.editmarks').on('click',function(){
 
 
+$('#resltview').modal('show');
 
-    $('#marks').val(data[2]);
-    $('#dd').val(data[0]);
+$tr= $(this).closest('tr');
 
-    $('#studentname').text("Submit Marks for: "+data[1]);
+var data= $tr.children("td").map(function(){
+
+       return $(this).text();
+
+}).get();
 
 
 
+$('#marks').val(data[2]);
+$('#dd').val(data[0]);
 
-
-   })
-
-   $('#marksb').on('click',function(){
-
-                    var student_id = $("#dd").val();
-                    var Subject_id = $("#subject_id").val();
-                    var marks = $("#marks").val();
+$('#studentname').text("Submit Marks for: "+data[1]);
 
 
 
 
-                    var data={student_id:student_id,Subject_id:Subject_id,marks:marks}
-                    var url="/submitmarks";
-                    axios.post(url,data)
-                    .then(function (response) {
 
+})
 
-                        console.log(response.data);
+$('#marksb').on('click',function(){
 
-                    location.reload();
-                    //location.reload();
-                    })
-                    .catch(function (error) {
-                        console.log(error.response.data);
-                    });
+                var student_id = $("#dd").val();
+                var Subject_id = $("#subject_id").val();
+                var marks = $("#marks").val();
 
 
 
-                    //$('#marksb').modal('hide');
+
+                var data={student_id:student_id,Subject_id:Subject_id,marks:marks}
+                var url="/submitmarks";
+                axios.post(url,data)
+                .then(function (response) {
+
+
+                    console.log(response.data);
+
+                location.reload();
+                //location.reload();
+                })
+                .catch(function (error) {
+                    console.log(error.response.data);
+                });
 
 
 
-                    })
+                //$('#marksb').modal('hide');
 
 
+
+                })
+
+
+
+
+
+
+        }catch(err) {
+  document.getElementById("demo").innerHTML = err.message;
+}
 
 
 

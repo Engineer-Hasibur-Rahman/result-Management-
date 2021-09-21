@@ -114,5 +114,16 @@ class TeacherController extends Controller
 
 
 
+        public function Fetchprofile(){
+
+            $id = session('id');
+
+            $teacherdata =Teacher::where('id',$id)->first();
+
+            return response()->json(['teacher'=> $teacherdata, ]);
+        }
+
+
+
 
 }

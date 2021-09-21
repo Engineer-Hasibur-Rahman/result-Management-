@@ -148,6 +148,7 @@
                             <div class="dropdown-menu dropdown-menu-right">
                                 <!-- item-->
                                 <a class="dropdown-item" href="/teacher/profile"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Profile</a>
+                                <a class="dropdown-item" href="/teacher/profile"><i class="bx bx-user font-size-16 align-middle mr-1"></i> Change Password</a>
                                 <a class="dropdown-item text-danger" href="/logout"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
                             </div>
                         </div>

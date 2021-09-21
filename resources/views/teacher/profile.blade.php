@@ -2,12 +2,24 @@
 
 @section('main_content')
 
+<style>
+
+
+
+.form-control:focus {
+      border-color: #0d8ce0;
+    }
+</style>
+
+
+
+
 <!-- Modal -->
 <div class="modal fade" id="resltview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">edit profile</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Edit profile</h5>
 
 
 
@@ -20,11 +32,36 @@
         <div class="modal-body">
 
             <form   method="post" action="{{ route('teacher') }}">
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Password"> <br>
-                <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+
+<div class="container">
+
+<div class="row">
+
+    <div class="col-12 col-md-6">
+      <label for="">User Name :</label>  <input type="text" class="form-control" id="username" placeholder="UserName"> <br>
+      <label for="">Email :</label>   <input type="text" class="form-control" id="email" placeholder="Email"><br>
+
+
+        <button type="button" href="/teacher" data-toggle="modal" data-target="#resltview" class="btn btn-primary">Update</button>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
                 <div class="modal-footer">
 
-                    <button type="button" href="/teacher" data-toggle="modal" data-target="#resltview" class="btn btn-primary">View result</button>
+
                   </div>
 
             </form>
@@ -95,7 +132,7 @@
                         <div class="row">
                             <div class="col-sm-3"></div>
                             <div class="col-sm-9 text-secondary">
-                                <button type="button"  data-toggle="modal" data-target="#resltview" class="btn btn-primary">Edit details</button>
+                                <button type="button" id="ed" data-toggle="modal" data-target="#resltview" class="btn btn-primary">Edit details</button>
                             </div>
                         </div>
                     </div>
@@ -111,6 +148,51 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+
+<script>
+
+    $(document).ready( function(){
+
+       $('#ed').on('click',function(){
+
+
+
+            axios.get('/fetchprofile')
+                .then(function (response) {
+                    const {data:{teacher}} = response;
+                    const {id,first_name,email} = teacher;
+                    // handle success
+                    // teacher: {id: 1, first_name: 'maruf', last_name: 'sfg', father_name: 'sdfgdfg', mother_name: 'sdgdfhdf', …
+                    $('#username').val(first_name)
+                    $('#email').val(email);
+                    console.log(response.data);
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+        })
+
+    })
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

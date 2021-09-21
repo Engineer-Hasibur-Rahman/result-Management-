@@ -95,7 +95,7 @@ Route::get('/section_edit/{id}', [AdminController::class,'section_edit'])->name(
 Route::post('/section_edit/{id}', [AdminController::class,'section_update'])->name('admin.section_update');
 Route::get('/section/delete/{id}', [AdminController::class,'Sectiondestroy'])->name('admin.Sectiondestroy');
 Route::get('/sec_student/delete/{id}', [AdminController::class,'Sec_Studentdestroy'])->name('admin.Sec_Studentdestroy');
- 
+
 Route::get('admin/Studentrecord/{id}',[AdminController::class, 'resultView']);
 
 Route::post('/adminsubmitmarks',[AdminController::class,'SubmitMarks']);
@@ -129,11 +129,15 @@ Route::group(['middleware'=>['type3']] , function(){
 	Route::get('/teacher',[TeacherController::class,'index'])->name('teacher');
 	Route::get('teacher/Studentrecord/{id}',[TeacherController::class, 'resultView']);
 	Route::get('teacher/profile',[TeacherController::class,'profile']);
-	
+
 	Route::get('teacher/TakenCourse',[TeacherController::class,'TakenCourse']);
 	Route::post('/submitmarks',[TeacherController::class,'SubmitMarks']);
-	
-	
+
+	Route::get('/fetchprofile',[TeacherController::class,'Fetchprofile']);
+
+
+
+
 });
 Route::group(['middleware'=>['type4']] , function(){
 Route::get('/student', 'StudentController@index');
